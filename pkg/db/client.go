@@ -74,6 +74,11 @@ func (c *Client) ListCyclists() ([]model.Cyclist, error) {
 	return cyclists, nil
 }
 
+func (c *Client) RemoveCyclist(cyclistId string) error {
+	_, err := c.db.Exec("DELETE FROM cyclists WHERE id = ?", cyclistId)
+	return err
+}
+
 func (c *Client) AddPage(cyclist model.Cyclist, page string) error {
 	_, err := c.db.Exec("INSERT INTO pages (riderid, page) VALUES (?,?)", cyclist.Id, page)
 	return err
@@ -107,6 +112,8 @@ func (c *Client) GetPages() (map[string]string, error) {
 		if riderID != previousRiderID {
 			pages[riderID] = page
 		}
+
+		previousRiderID = riderID
 	}
 	return pages, nil
 }

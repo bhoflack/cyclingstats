@@ -2047,3 +2047,13 @@ func TestUpcomingRaces(t *testing.T) {
 		t.Fatalf("expected 10 upcoming races, got %v", stats.UpcomingRaces)
 	}
 }
+
+func TestResults(t *testing.T) {
+	stats, err := Extract(content)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(stats.Results) != 12 {
+		t.Fatalf("expected 12 results, got %v", stats.Results)
+	}
+}

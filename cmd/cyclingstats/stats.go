@@ -15,13 +15,13 @@ func statCmd() *cobra.Command {
 	}
 
 	cmd.AddCommand(listStatsCmd())
-	cmd.AddCommand(UpcomingRacesCmd())
-	cmd.AddCommand(Participating())
+	cmd.AddCommand(upcomingRacesCmd())
+	cmd.AddCommand(participatingCmd())
 
 	return cmd
 }
 
-func UpcomingRacesCmd() *cobra.Command {
+func upcomingRacesCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "upcoming",
 		Short: "upcoming",
@@ -50,7 +50,7 @@ func UpcomingRacesCmd() *cobra.Command {
 	return cmd
 }
 
-func Participating() *cobra.Command {
+func participatingCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "participating",
 		Short: "participating",

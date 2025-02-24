@@ -16,6 +16,7 @@ func cyclistCmd() *cobra.Command {
 
 	cmd.AddCommand(addCyclistCmd())
 	cmd.AddCommand(listCyclistsCmd())
+	cmd.AddCommand(removeCyclistCmd())
 
 	return cmd
 }
@@ -76,6 +77,30 @@ func listCyclistsCmd() *cobra.Command {
 
 			for _, cyclist := range cyclists {
 				cmd.Println(cyclist)
+			}
+
+			return nil
+		},
+	}
+
+	return cmd
+}
+
+func removeCyclistCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "remove",
+		Short: "remove",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			client, err := db.NewClient()
+			if err != nil {
+				return err
+			}
+			defer client.Close()
+
+			for _, name := range args {
+				if err := client.RemoveCyclist(name); err != nil {
+					return err
+				}
 			}
 
 			return nil
