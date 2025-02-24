@@ -77,10 +77,10 @@ func Extract(body string) (Stats, error) {
 				result.Date = s.Text()
 			case 1:
 				result.Result = -1
-				if s.Text() != "DNF" && s.Text() != "DNS" && s.Text() != "OTL" && s.Text() != "" {
+				if s.Text() != "DNF" && s.Text() != "DNS" && s.Text() != "OTL" && s.Text() != "NR" && s.Text() != "DSQ" && s.Text() != "" {
 					v, err := strconv.Atoi(s.Text())
 					if err != nil {
-						log.Printf("error converting %s to int: %v", s.Text(), err)
+						log.Fatalf("error converting %s to int: %v", s.Text(), err)
 					}
 					result.Result = v
 				}
